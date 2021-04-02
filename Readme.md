@@ -44,3 +44,7 @@ func (*PanicHandler) Catch(Recover interface{}, Stack []byte) {
 }
 g.RegPanicHandler(PanicHandler)
  ```
+## 协程并发控制
+ ```
+g.NewPanicGroupWithLimit(10) // 并发限制10
+ ```
