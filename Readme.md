@@ -6,7 +6,7 @@ func f1() {
 	panic("f1")
 }
 ctx := context.Background()
-g := NewPanicGroup()
+g := safego.NewPanicGroup()
 g.Go(f1)
 err := g.Wait(ctx)
 if err != nil {
@@ -24,14 +24,14 @@ func f1WithParams(a int, b string) func() {
 	}
 }
 ctx := context.Background()
-g := NewPanicGroup()
+g := safego.NewPanicGroup()
 g.Go(f1WithParams(123, "abc"))
 err := g.Wait(ctx)
  ```
 ## 链式调用
  ```
 ctx := context.Background()
-err := NewPanicGroup().Go(f1).Go(f2).Wait(ctx)
+err := safego.NewPanicGroup().Go(f1).Go(f2).Wait(ctx)
  ```
 ## 注册自定义Catch处理器
  ```
@@ -46,5 +46,5 @@ g.RegPanicHandler(PanicHandler)
  ```
 ## 协程并发控制
  ```
-g.NewPanicGroupWithLimit(10) // 并发限制10
+g := safego.NewPanicGroupWithLimit(10) // 并发限制10
  ```
