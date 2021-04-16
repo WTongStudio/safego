@@ -21,7 +21,7 @@ func f1WithParams(a int, b string) func() {
 
 func Demo(ctx context.Context) {
 	fmt.Println(ctx)
-	g := NewPanicGroup()
+	g := NewPanicGroup(8)
 	g.Go(f1)
 	g.Go(f1WithParams(123, "abc"))
 	err := g.Wait(ctx)

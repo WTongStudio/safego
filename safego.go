@@ -38,10 +38,10 @@ type PanicGroup struct {
 }
 
 // 工厂方法
-func NewPanicGroup() *PanicGroup {
+func NewPanicGroup(corNum int32) *PanicGroup {
 	return &PanicGroup{
-		panics:  make(chan Panic, 8),
-		dones:   make(chan struct{}, 8),
+		panics:  make(chan Panic, corNum),
+		dones:   make(chan struct{}, corNum),
 		handler: &DefaultPanicHandler{},
 	}
 }
